@@ -24,7 +24,7 @@ export function Navbar() {
           <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-gradient-to-br from-coral to-clay flex items-center justify-center">
             <Zap className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
           </div>
-          <span className="font-display text-base sm:text-lg font-semibold text-ink group-hover:text-coral transition hidden sm:inline">
+          <span className="font-display text-base sm:text-lg font-semibold text-ink group-hover:text-coral transition">
             Lucas
           </span>
         </Link>
@@ -34,6 +34,7 @@ export function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 text-ink/70 hover:text-ink transition"
           aria-label="Toggle menu"
+          
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
