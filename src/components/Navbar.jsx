@@ -17,104 +17,106 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-40 backdrop-blur-md border-b border-ink/10 bg-parchment/80">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-coral to-clay flex items-center justify-center">
-            <Zap className="w-6 h-6 text-white" />
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
+          <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-gradient-to-br from-coral to-clay flex items-center justify-center">
+            <Zap className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
           </div>
-          <span className="font-display text-lg font-semibold text-ink group-hover:text-coral transition hidden sm:inline">
+          <span className="font-display text-base sm:text-lg font-semibold text-ink group-hover:text-coral transition hidden sm:inline">
             Lucas
           </span>
         </Link>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - Shows only on mobile */}
         <button 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-ink/70 hover:text-ink transition"
+          className="md:hidden p-2 text-ink/70 hover:text-ink transition"
+          aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* Desktop Navigation - Hidden on mobile, visible on md+ */}
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
           <Link
             to="/dashboard"
-            className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
+            className="text-xs lg:text-sm text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
           >
             <BookOpen className="w-4 h-4" />
             <span className="hidden lg:inline">Dashboard</span>
           </Link>
           <Link
             to="/lessons"
-            className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
+            className="text-xs lg:text-sm text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
           >
             <Trophy className="w-4 h-4" />
             <span className="hidden lg:inline">Lessons</span>
           </Link>
           <Link
             to="/practice"
-            className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
+            className="text-xs lg:text-sm text-ink/70 hover:text-ink font-body flex items-center gap-2 transition"
           >
             <MessageSquare className="w-4 h-4" />
             <span className="hidden lg:inline">Practice</span>
           </Link>
-          <Link to="/profile">
-            <Button variant="secondary" size="sm">
-              <Settings className="w-4 h-4 mr-2" />
+          <Link to="/profile" className="flex-shrink-0">
+            <Button variant="secondary" size="sm" className="text-xs">
+              <Settings className="w-4 h-4 mr-1" />
               <span className="hidden lg:inline">Profile</span>
             </Button>
           </Link>
-          <button onClick={handleLogout} className="text-ink/60 hover:text-coral transition">
-            <LogOut className="w-5 h-5" />
+          <button onClick={handleLogout} className="text-ink/60 hover:text-coral transition" aria-label="Logout">
+            <LogOut className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full width dropdown on mobile only */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-ink/10 bg-parchment/95 backdrop-blur-md">
-          <div className="px-4 py-4 flex flex-col gap-4">
+          <div className="px-3 sm:px-4 py-4 flex flex-col gap-2">
             <Link
               to="/dashboard"
               onClick={closeMobileMenu}
-              className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition py-2"
+              className="text-sm text-ink/70 hover:text-ink font-body flex items-center gap-3 transition py-3 px-2 hover:bg-white/30 rounded-lg"
             >
-              <BookOpen className="w-4 h-4" />
-              Dashboard
+              <BookOpen className="w-5 h-5 flex-shrink-0" />
+              <span>Dashboard</span>
             </Link>
             <Link
               to="/lessons"
               onClick={closeMobileMenu}
-              className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition py-2"
+              className="text-sm text-ink/70 hover:text-ink font-body flex items-center gap-3 transition py-3 px-2 hover:bg-white/30 rounded-lg"
             >
-              <Trophy className="w-4 h-4" />
-              Lessons
+              <Trophy className="w-5 h-5 flex-shrink-0" />
+              <span>Lessons</span>
             </Link>
             <Link
               to="/practice"
               onClick={closeMobileMenu}
-              className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition py-2"
+              className="text-sm text-ink/70 hover:text-ink font-body flex items-center gap-3 transition py-3 px-2 hover:bg-white/30 rounded-lg"
             >
-              <MessageSquare className="w-4 h-4" />
-              Practice
+              <MessageSquare className="w-5 h-5 flex-shrink-0" />
+              <span>Practice</span>
             </Link>
             <Link 
               to="/profile"
               onClick={closeMobileMenu}
-              className="text-ink/70 hover:text-ink font-body flex items-center gap-2 transition py-2"
+              className="text-sm text-ink/70 hover:text-ink font-body flex items-center gap-3 transition py-3 px-2 hover:bg-white/30 rounded-lg"
             >
-              <Settings className="w-4 h-4" />
-              Profile
+              <Settings className="w-5 h-5 flex-shrink-0" />
+              <span>Profile</span>
             </Link>
+            <hr className="my-2 border-ink/10" />
             <button 
               onClick={() => {
                 handleLogout()
                 closeMobileMenu()
               }} 
-              className="text-ink/60 hover:text-coral transition flex items-center gap-2 py-2"
+              className="text-sm text-ink/60 hover:text-coral transition flex items-center gap-3 py-3 px-2 hover:bg-white/30 rounded-lg"
             >
-              <LogOut className="w-5 h-5" />
-              Sign Out
+              <LogOut className="w-5 h-5 flex-shrink-0" />
+              <span>Sign Out</span>
             </button>
           </div>
         </div>
