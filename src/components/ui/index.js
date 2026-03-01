@@ -5,4 +5,5 @@ export { Input } from './input'
 export { Textarea } from './textarea'
 export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from './dialog'
 export { Progress } from './progress'
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs'
+// export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs' // Commented out - missing @radix-ui/react-tabs dependency
+
