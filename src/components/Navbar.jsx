@@ -1,6 +1,6 @@
 import { Zap, BookOpen, MessageSquare, Trophy, Settings, LogOut, Menu, X, LogIn } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button } from '../ui'
+import { Button } from './ui'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
