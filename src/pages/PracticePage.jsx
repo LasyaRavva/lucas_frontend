@@ -1,47 +1,87 @@
 
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import apiClient from '../services/api'
 
 export default function PracticePage() {
   const navigate = useNavigate()
-  const [status, setStatus] = useState({})
+  const [counts, setCounts] = useState({
+    flashcards: 0,
+    quizzes: 0,
+    conversation: 0,
+    pronunciation: 0,
+  })
+  const [learningLanguage, setLearningLanguage] = useState('Spanish')
 
-  // Utility to get userId from localStorage
-  const getUserId = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    return user?.id
-  }
+  useEffect(() => {
+    async function fetchDynamicPracticeData() {
+      try {
+        const storedUser = JSON.parse(localStorage.getItem('user'))
+        const userId = storedUser?.id
 
-  // Handler to mark practice as complete and update progress
-  const handleComplete = async (type) => {
-    const userId = getUserId()
-    if (!userId) {
-      setStatus((prev) => ({ ...prev, [type]: 'No user' }))
-      return
-    }
-    setStatus((prev) => ({ ...prev, [type]: 'loading' }))
-    try {
-      const { data } = await apiClient.post('/auth/progress/complete', {
-        userId,
-        type,
-        itemId: null,
-      })
-      // Update user profile in localStorage if present
-      const user = JSON.parse(localStorage.getItem('user'))
-      if (user) {
-        localStorage.setItem('user', JSON.stringify({ ...user, ...data }))
-        // Broadcast a custom event so DashboardPage can listen and update
-        window.dispatchEvent(new Event('profileUpdated'))
+        const requests = [
+          apiClient.get('/lessons'),
+          apiClient.get('/flashcards'),
+          apiClient.get('/quizzes'),
+          apiClient.get('/conversation'),
+        ]
+
+        if (userId) {
+          requests.unshift(apiClient.get('/auth/profile', { params: { id: userId } }))
+        }
+
+        const responses = await Promise.all(requests)
+
+        const profileData = userId ? responses[0].data : null
+        const lessons = (userId ? responses[1].data : responses[0].data) || []
+        const flashcards = (userId ? responses[2].data : responses[1].data) || []
+        const quizzes = (userId ? responses[3].data : responses[2].data) || []
+        const conversations = (userId ? responses[4].data : responses[3].data) || []
+
+        const selectedLanguage =
+          profileData?.learning_language ||
+          profileData?.learningLanguage ||
+          storedUser?.learning_language ||
+          storedUser?.learningLanguage ||
+          'Spanish'
+        setLearningLanguage(selectedLanguage)
+
+        const languageLessonIds = lessons
+          .filter((lesson) => {
+            const lessonLanguage = lesson?.language || lesson?.learning_language || lesson?.target_language
+            return lessonLanguage ? lessonLanguage === selectedLanguage : true
+          })
+          .map((lesson) => lesson.id)
+
+        const hasLanguageTaggedLessons = lessons.some(
+          (lesson) => lesson?.language || lesson?.learning_language || lesson?.target_language
+        )
+
+        const isInSelectedLessons = (lessonId) => {
+          if (!lessonId) return !hasLanguageTaggedLessons
+          return languageLessonIds.includes(lessonId)
+        }
+
+        const flashcardsCount = flashcards.filter((item) => isInSelectedLessons(item.lesson_id)).length
+        const quizzesCount = quizzes.filter((item) => isInSelectedLessons(item.lesson_id)).length
+        const conversationCount = conversations.filter((item) => isInSelectedLessons(item.lesson_id)).length
+        const pronunciationCount = languageLessonIds.length
+
+        setCounts({
+          flashcards: flashcardsCount,
+          quizzes: quizzesCount,
+          conversation: conversationCount,
+          pronunciation: pronunciationCount,
+        })
+      } catch {
+        setCounts({ flashcards: 0, quizzes: 0, conversation: 0, pronunciation: 0 })
       }
-      setStatus((prev) => ({ ...prev, [type]: 'done' }))
-      setTimeout(() => setStatus((prev) => ({ ...prev, [type]: undefined })), 2000)
-    } catch {
-      setStatus((prev) => ({ ...prev, [type]: 'error' }))
     }
-  }
+
+    fetchDynamicPracticeData()
+  }, [])
 
   return (
     <div className="max-w-3xl mx-auto py-10 px-4">
@@ -55,6 +95,9 @@ export default function PracticePage() {
           </CardHeader>
           <CardContent>
             <p>Review vocabulary using spaced repetition flashcards.</p>
+            <p className="text-sm text-ink/60 mt-2">
+              {counts.flashcards} flashcards available for {learningLanguage}.
+            </p>
             {/* Mark Complete button removed */}
           </CardContent>
         </Card>
@@ -66,6 +109,9 @@ export default function PracticePage() {
           </CardHeader>
           <CardContent>
             <p>Test your knowledge with interactive quizzes and mini-games.</p>
+            <p className="text-sm text-ink/60 mt-2">
+              {counts.quizzes} quizzes available for {learningLanguage}.
+            </p>
             {/* Mark Complete button removed */}
           </CardContent>
         </Card>
@@ -77,6 +123,9 @@ export default function PracticePage() {
           </CardHeader>
           <CardContent>
             <p>Practice speaking and get instant feedback on your accent.</p>
+            <p className="text-sm text-ink/60 mt-2">
+              {counts.pronunciation} pronunciation prompts linked to {learningLanguage} lessons.
+            </p>
             {/* Mark Complete button removed */}
           </CardContent>
         </Card>
@@ -88,6 +137,9 @@ export default function PracticePage() {
           </CardHeader>
           <CardContent>
             <p>Engage in real-world dialogues and practice your skills.</p>
+            <p className="text-sm text-ink/60 mt-2">
+              {counts.conversation} scenarios available for {learningLanguage}.
+            </p>
             {/* Mark Complete button removed */}
           </CardContent>
         </Card>
