@@ -74,7 +74,7 @@ export default function PronunciationPage() {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       mediaStreamRef.current = stream
       
-      const source = audioContext.createMediaStreamAudioProcessor(stream)
+      const source = audioContext.createMediaStreamSource(stream)
       const analyser = audioContext.createAnalyser()
       analyser.fftSize = 2048
       source.connect(analyser)
