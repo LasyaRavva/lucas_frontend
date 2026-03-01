@@ -29,27 +29,27 @@ export default function LessonDetailsPage() {
   if (!lesson) return null;
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
+    <div className="max-w-2xl mx-auto py-6 sm:py-8 px-3 sm:px-4">
       <Card>
-        <CardTitle>{lesson.title}</CardTitle>
-        <CardContent>
-          <div className="mb-2">
-            <Badge variant="sea">{lesson.level}</Badge>
+        <CardTitle className="text-2xl sm:text-3xl p-4 sm:p-6">{lesson.title}</CardTitle>
+        <CardContent className="p-4 sm:p-6">
+          <div className="mb-4 flex flex-wrap gap-2">
+            <Badge variant="sea" className="text-xs">{lesson.level}</Badge>
             {lesson.topics && lesson.topics.map((topic, i) => (
-              <Badge key={i} variant="coral" className="ml-2">{topic}</Badge>
+              <Badge key={i} variant="coral" className="text-xs">{topic}</Badge>
             ))}
           </div>
-          <div className="mb-4 text-lg">{lesson.content?.text}</div>
+          <div className="mb-4 text-sm sm:text-base text-ink/80">{lesson.content?.text}</div>
           {lesson.learning_practices && (
             <div className="mt-4">
-              <h2 className="font-semibold text-xl mb-2">Practice</h2>
-              <div>{lesson.learning_practices.practice}</div>
+              <h2 className="font-semibold text-lg sm:text-xl mb-2">Practice</h2>
+              <div className="text-xs sm:text-sm">{lesson.learning_practices.practice}</div>
             </div>
           )}
           {lesson.learning_tips && (
-            <div className="mt-6 p-4 bg-moss/10 rounded-lg border border-moss/30">
-              <h3 className="font-semibold text-moss mb-1">Learning Tip</h3>
-              <div className="text-moss/90">{lesson.learning_tips}</div>
+            <div className="mt-6 p-3 sm:p-4 bg-moss/10 rounded-lg border border-moss/30">
+              <h3 className="font-semibold text-sm sm:text-base text-moss mb-1">Learning Tip</h3>
+              <div className="text-xs sm:text-sm text-moss/90">{lesson.learning_tips}</div>
             </div>
           )}
         </CardContent>

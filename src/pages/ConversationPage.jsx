@@ -64,21 +64,21 @@ export default function ConversationPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl md:text-4xl mb-6">Conversation Scenarios</h1>
-      <div className="grid grid-cols-1 gap-6">
+    <div className="max-w-3xl mx-auto py-6 sm:py-10 px-3 sm:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Conversation Scenarios</h1>
+      <div className="grid grid-cols-1 gap-4 sm:gap-6">
         {scenarios.map((scenario) => (
           <Card key={scenario.id} className="hover:shadow-card transition-shadow duration-300">
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <CardTitle>{scenario.title}</CardTitle>
-                <Badge variant={scenario.badge}>Scenario</Badge>
+              <div className="flex items-center gap-2 flex-wrap">
+                <CardTitle className="text-lg sm:text-xl">{scenario.title}</CardTitle>
+                <Badge variant={scenario.badge} className="text-xs">Scenario</Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <pre className="bg-mist rounded-lg p-3 text-ink/80 mb-2 whitespace-pre-line">{scenario.script}</pre>
+              <pre className="bg-mist rounded-lg p-2 sm:p-3 text-xs sm:text-sm text-ink/80 mb-2 whitespace-pre-line overflow-x-auto">{scenario.script}</pre>
               <button
-                className="mt-2 px-4 py-2 rounded-xl bg-clay text-white font-semibold hover:bg-clay/80"
+                className="mt-2 px-4 py-2 rounded-xl bg-clay text-white text-xs sm:text-sm font-semibold hover:bg-clay/80 transition"
                 onClick={() => handlePractice(scenario.id)}
                 disabled={status[scenario.id] === 'loading'}
               >

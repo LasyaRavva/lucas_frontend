@@ -86,10 +86,10 @@ export function ProfilePage({ onBack }) {
     <div className="min-h-screen">
       {/* Header */}
       <header className="border-b border-ink/10 bg-white/40 backdrop-blur-md">
-        <div className="mx-auto max-w-2xl px-4 py-4">
+        <div className="mx-auto max-w-2xl px-4 py-3 sm:py-4">
           <button
             onClick={onBack || (() => navigate('/'))}
-            className="flex items-center gap-2 text-sm font-semibold text-ink/60 transition hover:text-ink"
+            className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-ink/60 transition hover:text-ink"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
@@ -98,38 +98,39 @@ export function ProfilePage({ onBack }) {
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-2xl px-4 py-8">
-        <div className="mb-8 space-y-2">
-          <h1 className="font-display text-3xl font-bold text-ink">Profile Settings</h1>
-          <p className="text-ink/60">Manage your learning preferences</p>
+      <main className="mx-auto max-w-2xl px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8 space-y-2">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold text-ink">Profile Settings</h1>
+          <p className="text-xs sm:text-sm text-ink/60">Manage your learning preferences</p>
         </div>
 
         <Card className="border-0">
           <CardHeader>
-            <CardTitle>Personal Information</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">Personal Information</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6">
             {error && (
-              <div className="flex gap-3 rounded-lg bg-coral/15 p-4 text-sm text-coral">
-                <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <div className="flex gap-3 rounded-lg bg-coral/15 p-3 sm:p-4 text-xs sm:text-sm text-coral">
+                <AlertCircle className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0 mt-0.5" />
                 {error}
               </div>
             )}
 
             {success && (
-              <div className="flex gap-3 rounded-lg bg-moss/15 p-4 text-sm text-moss">
-                <AlertCircle className="h-5 w-5 flex-shrink-0" />
+              <div className="flex gap-3 rounded-lg bg-moss/15 p-3 sm:p-4 text-xs sm:text-sm text-moss">
+                <AlertCircle className="h-4 sm:h-5 w-4 sm:w-5 flex-shrink-0 mt-0.5" />
                 {success}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-semibold uppercase text-ink/70">Full Name</label>
                 <Input
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Your full name"
+                  className="text-sm"
                 />
               </div>
 
@@ -140,7 +141,7 @@ export function ProfilePage({ onBack }) {
                 <select
                   value={learningLanguage}
                   onChange={(e) => setLearningLanguage(e.target.value)}
-                  className="h-11 w-full rounded-lg border border-ink/20 bg-white/60 px-4 py-2 text-sm transition focus:border-sea/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sea/20"
+                  className="h-10 sm:h-11 w-full rounded-lg border border-ink/20 bg-white/60 px-4 py-2 text-xs sm:text-sm transition focus:border-sea/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sea/20"
                 >
                   {languageOptions.map((language) => (
                     <option key={language} value={language}>
@@ -155,7 +156,7 @@ export function ProfilePage({ onBack }) {
                 <select
                   value={level}
                   onChange={(e) => setLevel(e.target.value)}
-                  className="h-11 w-full rounded-lg border border-ink/20 bg-white/60 px-4 py-2 text-sm transition focus:border-sea/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sea/20"
+                  className="h-10 sm:h-11 w-full rounded-lg border border-ink/20 bg-white/60 px-4 py-2 text-xs sm:text-sm transition focus:border-sea/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-sea/20"
                 >
                   <option value="beginner">Beginner</option>
                   <option value="intermediate">Intermediate</option>
@@ -164,7 +165,7 @@ export function ProfilePage({ onBack }) {
                 </select>
               </div>
 
-              <Button type="submit" disabled={loading} className="w-full flex items-center gap-2">
+              <Button type="submit" disabled={loading} className="w-full flex items-center gap-2 text-sm">
                 <Save className="h-4 w-4" />
                 {loading ? 'Saving...' : 'Save Changes'}
               </Button>
@@ -173,20 +174,20 @@ export function ProfilePage({ onBack }) {
         </Card>
 
         {/* Learning Stats */}
-        <Card className="mt-8 border-0">
+        <Card className="mt-6 sm:mt-8 border-0">
           <CardHeader>
-            <CardTitle>Learning Statistics</CardTitle>
+            <CardTitle className="text-lg sm:text-xl">Learning Statistics</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2 rounded-lg bg-coral/5 p-4">
-              <Badge variant="coral">Current</Badge>
-              <p className="text-sm text-ink/60">Learning Language</p>
-              <p className="text-lg font-semibold text-ink">{learningLanguage}</p>
+            <div className="space-y-2 rounded-lg bg-coral/5 p-3 sm:p-4">
+              <Badge variant="coral" className="text-xs">Current</Badge>
+              <p className="text-xs sm:text-sm text-ink/60">Learning Language</p>
+              <p className="text-base sm:text-lg font-semibold text-ink">{learningLanguage}</p>
             </div>
-            <div className="space-y-2 rounded-lg bg-sea/5 p-4">
-              <Badge variant="sea">Current</Badge>
-              <p className="text-sm text-ink/60">Proficiency Level</p>
-              <p className="text-lg font-semibold text-ink capitalize">{level}</p>
+            <div className="space-y-2 rounded-lg bg-sea/5 p-3 sm:p-4">
+              <Badge variant="sea" className="text-xs">Current</Badge>
+              <p className="text-xs sm:text-sm text-ink/60">Proficiency Level</p>
+              <p className="text-base sm:text-lg font-semibold text-ink capitalize">{level}</p>
             </div>
           </CardContent>
         </Card>

@@ -30,21 +30,21 @@ export default function QuizzesPage() {
   if (error) return <div className="text-center text-red-500 py-10">{error}</div>
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl md:text-4xl mb-6">Quizzes</h1>
-      <div className="grid grid-cols-1 gap-6">
+    <div className="max-w-3xl mx-auto py-6 sm:py-10 px-3 sm:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Quizzes</h1>
+      <div className="grid grid-cols-1 gap-4 sm:gap-6">
         {quizzes.map((quiz) => (
           <Card key={quiz.id} className="hover:shadow-card transition-shadow duration-300">
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <CardTitle>{quiz.title}</CardTitle>
-                <Badge variant={quiz.badge || 'coral'}>{quiz.title.includes('Vocabulary') ? 'Words' : 'Grammar'}</Badge>
+              <div className="flex items-center gap-2 flex-wrap">
+                <CardTitle className="text-lg sm:text-xl">{quiz.title}</CardTitle>
+                <Badge variant={quiz.badge || 'coral'} className="text-xs">{quiz.title.includes('Vocabulary') ? 'Words' : 'Grammar'}</Badge>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-ink/80 mb-2">{quiz.description}</div>
+              <div className="text-xs sm:text-sm text-ink/80 mb-2">{quiz.description}</div>
               <button
-                className="mt-2 px-4 py-2 rounded-xl bg-coral text-white font-semibold hover:bg-coral/80"
+                className="mt-2 px-4 py-2 rounded-xl bg-coral text-white text-xs sm:text-sm font-semibold hover:bg-coral/80 transition"
                 onClick={() => navigate(`/quizzes/${quiz.id}`)}
               >
                 Start Quiz

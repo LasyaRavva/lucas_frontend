@@ -41,33 +41,33 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-mist">
-      <div className="w-full max-w-md p-8 rounded-2xl shadow-card bg-white/90">
-        <h1 className="font-display text-2xl mb-6 text-center">Create Your Account</h1>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          {error && <div className="text-coral text-sm mb-2">{error}</div>}
+    <div className="min-h-screen flex items-center justify-center bg-mist px-3 sm:px-4 py-6 sm:py-12">
+      <div className="w-full max-w-md px-4 sm:px-8 py-6 sm:py-8 rounded-2xl shadow-card bg-white/90">
+        <h1 className="font-display text-xl sm:text-2xl mb-6 sm:mb-8 text-center">Create Your Account</h1>
+        <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
+          {error && <div className="text-coral text-xs sm:text-sm mb-2">{error}</div>}
           <input
             type="text"
             placeholder="Name"
             value={name}
             onChange={e => setName(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none text-sm"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none text-sm"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border border-ink/10 focus:border-sea focus:outline-none text-sm"
           />
-          <Button className="w-full mt-2" type="submit" disabled={loading}>
+          <Button className="w-full mt-2 text-sm" type="submit" disabled={loading}>
             {loading ? 'Registering...' : 'Register'}
           </Button>
         </form>

@@ -28,15 +28,15 @@ export default function Lessons() {
   if (error) return <div className="text-center text-red-500 py-10">{error}</div>;
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl mb-6">Lessons</h1>
-      <div className="grid gap-6">
+    <div className="max-w-3xl mx-auto py-6 sm:py-10 px-3 sm:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl mb-4 sm:mb-6">Lessons</h1>
+      <div className="grid gap-4 sm:gap-6">
         {lessons.map(lesson => (
           <Card key={lesson.id} className="hover:shadow-card transition-shadow duration-300 cursor-pointer" onClick={() => navigate(`/lessons/${lesson.id}`)}>
             <CardHeader>
-              <CardTitle>{lesson.title}</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">{lesson.title}</CardTitle>
             </CardHeader>
-            <CardContent>{lesson.content?.text || lesson.description || ''}</CardContent>
+            <CardContent className="text-xs sm:text-sm">{lesson.content?.text || lesson.description || ''}</CardContent>
           </Card>
         ))}
       </div>

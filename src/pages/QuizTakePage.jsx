@@ -62,10 +62,10 @@ export default function QuizTakePage() {
 
   if (showResult) {
     return (
-      <div className="max-w-xl mx-auto py-10 px-4 text-center">
-        <h1 className="font-display text-3xl font-bold mb-4">Quiz Complete!</h1>
-        <div className="text-lg mb-2">Your Score: {score} / {questions.length}</div>
-        <Button onClick={() => navigate('/quizzes')}>Back to Quizzes</Button>
+      <div className="max-w-xl mx-auto py-6 sm:py-10 px-3 sm:px-4 text-center">
+        <h1 className="font-display text-2xl sm:text-3xl font-bold mb-4">Quiz Complete!</h1>
+        <div className="text-base sm:text-lg mb-6">Your Score: {score} / {questions.length}</div>
+        <Button onClick={() => navigate('/quizzes')} className="text-sm sm:text-base">Back to Quizzes</Button>
       </div>
     );
   }
@@ -74,20 +74,21 @@ export default function QuizTakePage() {
   const options = Array.isArray(q.options) ? q.options : JSON.parse(q.options);
 
   return (
-    <div className="max-w-xl mx-auto py-10 px-4">
+    <div className="max-w-xl mx-auto py-6 sm:py-10 px-3 sm:px-4">
       <Card>
         <CardHeader>
-          <CardTitle>Question {current + 1} of {questions.length}</CardTitle>
+          <CardTitle className="text-lg sm:text-xl">Question {current + 1} of {questions.length}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="mb-4 font-semibold">{q.question}</div>
-          <div className="flex flex-col gap-3">
+          <div className="mb-4 font-semibold text-xs sm:text-sm">{q.question}</div>
+          <div className="flex flex-col gap-2 sm:gap-3">
             {options.map((opt, idx) => (
               <Button
                 key={idx}
                 variant={selected === null ? 'outline' : idx === q.correct_option ? 'moss' : selected === idx ? 'coral' : 'outline'}
                 disabled={selected !== null}
                 onClick={() => handleAnswer(idx)}
+                className="text-xs sm:text-sm h-auto py-2 sm:py-3"
               >
                 {opt}
               </Button>

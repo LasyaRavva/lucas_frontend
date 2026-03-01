@@ -46,26 +46,27 @@ export default function FlashcardsPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl md:text-4xl mb-6">Flashcards</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="max-w-3xl mx-auto py-6 sm:py-10 px-3 sm:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Flashcards</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {flashcards.map((card) => (
           <Card key={card.id} className="hover:shadow-card transition-shadow duration-300">
             <CardHeader>
-              <CardTitle>{card.front}</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">{card.front}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-ink/80 mb-2">{card.back}</div>
-              <Badge variant="sea">Lesson: {card.lesson_id?.slice(0, 6) || 'N/A'}</Badge>
+              <div className="text-xs sm:text-sm text-ink/80 mb-2">{card.back}</div>
+              <Badge variant="sea" className="text-xs">Lesson: {card.lesson_id?.slice(0, 6) || 'N/A'}</Badge>
               <div className="mt-4">
                 <Button
                   variant={learned[card.id] === 'done' ? 'moss' : 'outline'}
                   disabled={learned[card.id] === 'done' || learned[card.id] === 'loading'}
                   onClick={() => handleLearned(card.id)}
+                  className="w-full text-xs sm:text-sm"
                 >
                   {learned[card.id] === 'done' ? 'Learned!' : learned[card.id] === 'loading' ? 'Marking...' : 'Mark as Learned'}
                 </Button>
-                {learned[card.id] === 'error' && <span className="text-coral ml-2">Error! Try again.</span>}
+                {learned[card.id] === 'error' && <span className="text-coral ml-2 text-xs">Error! Try again.</span>}
               </div>
             </CardContent>
           </Card>

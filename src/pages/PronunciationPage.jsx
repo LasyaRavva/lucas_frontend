@@ -208,50 +208,51 @@ export default function PronunciationPage() {
   const currentExercise = pronunciations[currentIndex]
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl md:text-4xl mb-6">Pronunciation Practice</h1>
+    <div className="max-w-3xl mx-auto py-6 sm:py-10 px-4 sm:px-6 md:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Pronunciation Practice</h1>
       
-      <div className="mb-4 text-sm text-gray-600">
+      <div className="mb-4 text-xs sm:text-sm text-gray-600">
         Exercise {currentIndex + 1} of {pronunciations.length} • {userLanguage}
       </div>
 
       <Card className="hover:shadow-card transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+          <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
             <span>Speak {userLanguage}</span>
-            <Badge variant="moss" className="bg-moss/10 text-moss border-moss/20">
+            <Badge variant="moss" className="bg-moss/10 text-moss border-moss/20 text-xs sm:text-sm">
               {currentExercise.difficulty}
             </Badge>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6">
           <div>
-            <p className="text-sm text-gray-600 mb-2">Read aloud:</p>
-            <p className="text-2xl font-semibold text-gray-900 mb-2">{currentExercise.text}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mb-2">Read aloud:</p>
+            <p className="text-lg sm:text-2xl font-semibold text-gray-900 mb-2 break-words">{currentExercise.text}</p>
             {currentExercise.phonetic && (
-              <p className="text-sm text-gray-500 italic">Pronunciation: {currentExercise.phonetic}</p>
+              <p className="text-xs sm:text-sm text-gray-500 italic">{currentExercise.phonetic}</p>
             )}
           </div>
 
           {currentExercise.tips && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <p className="text-sm text-amber-900">
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
+              <p className="text-xs sm:text-sm text-amber-900">
                 <span className="font-semibold">💡 Tip: </span>
                 {currentExercise.tips}
               </p>
             </div>
           )}
 
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <button 
-              className="flex-1 px-6 py-3 rounded-xl bg-sea text-white font-semibold hover:bg-sea/80 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed" 
+              className="flex-1 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-sea text-white font-semibold hover:bg-sea/80 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed text-sm sm:text-base" 
               onClick={handleRecord} 
               disabled={recording}
             >
               {recording ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                  Recording... {recordingTime}s
+                  <span className="hidden sm:inline">Recording... {recordingTime}s</span>
+                  <span className="sm:hidden">{recordingTime}s</span>
                 </span>
               ) : (
                 '🎤 Start Recording'
@@ -260,11 +261,11 @@ export default function PronunciationPage() {
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <p className="text-red-900 font-semibold mb-3">{error}</p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4">
+              <p className="text-red-900 font-semibold mb-3 text-xs sm:text-sm">{error}</p>
               <button
                 onClick={handleRetry}
-                className="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors text-sm"
+                className="px-3 sm:px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors text-xs sm:text-sm"
               >
                 🔄 Try Again
               </button>
@@ -272,21 +273,21 @@ export default function PronunciationPage() {
           )}
 
           {feedback && (
-            <div className="bg-moss/10 border border-moss/20 rounded-lg p-4">
-              <p className="text-moss font-semibold">{feedback}</p>
+            <div className="bg-moss/10 border border-moss/20 rounded-lg p-3 sm:p-4">
+              <p className="text-moss font-semibold text-sm sm:text-base">{feedback}</p>
             </div>
           )}
 
-          <div className="flex gap-3 pt-4 border-t">
+          <div className="flex gap-2 sm:gap-3 pt-4 border-t">
             <button
               onClick={handlePrevious}
-              className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+              className="flex-1 px-3 sm:px-4 py-2 sm:py-2 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors text-sm sm:text-base"
             >
               ← Previous
             </button>
             <button
               onClick={handleNext}
-              className="flex-1 px-4 py-2 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+              className="flex-1 px-3 sm:px-4 py-2 sm:py-2 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors text-sm sm:text-base"
             >
               Next →
             </button>
@@ -295,7 +296,7 @@ export default function PronunciationPage() {
       </Card>
 
       {/* Progress indicator dots */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-1 sm:gap-2 mt-6 flex-wrap">
         {pronunciations.map((_, index) => (
           <button
             key={index}
@@ -305,11 +306,11 @@ export default function PronunciationPage() {
               setError('')
               setRecordingTime(0)
             }}
-            className={`w-2 h-2 rounded-full transition-all ${
+            className={`transition-all ${
               index === currentIndex 
-                ? 'bg-sea w-8' 
-                : 'bg-gray-300 hover:bg-gray-400'
-            }`}
+                ? 'bg-sea sm:w-8 w-2 h-2' 
+                : 'bg-gray-300 hover:bg-gray-400 w-2 h-2'
+            } rounded-full`}
             aria-label={`Go to exercise ${index + 1}`}
           />
         ))}

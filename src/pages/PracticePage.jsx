@@ -84,63 +84,59 @@ export default function PracticePage() {
   }, [])
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="font-display text-3xl md:text-4xl mb-6">Practice Activities</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="max-w-4xl mx-auto py-6 sm:py-10 px-4 sm:px-6 md:px-4">
+      <h1 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Practice Activities</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         {/* Flashcards */}
         <Card className="hover:shadow-card transition-shadow duration-300 cursor-pointer">
           <CardHeader onClick={() => navigate('/flashcards')} style={{ cursor: 'pointer' }}>
-            <CardTitle>Flashcards</CardTitle>
-            <Badge variant="coral">Spaced Repetition</Badge>
+            <CardTitle className="text-lg sm:text-xl">Flashcards</CardTitle>
+            <Badge variant="coral" className="text-xs sm:text-sm mt-2">Spaced Repetition</Badge>
           </CardHeader>
           <CardContent>
-            <p>Review vocabulary using spaced repetition flashcards.</p>
-            <p className="text-sm text-ink/60 mt-2">
+            <p className="text-xs sm:text-sm">Review vocabulary using spaced repetition flashcards.</p>
+            <p className="text-xs sm:text-sm text-ink/60 mt-2">
               {counts.flashcards} flashcards available for {learningLanguage}.
             </p>
-            {/* Mark Complete button removed */}
           </CardContent>
         </Card>
         {/* Quizzes */}
         <Card className="hover:shadow-card transition-shadow duration-300 cursor-pointer">
           <CardHeader onClick={() => navigate('/quizzes')} style={{ cursor: 'pointer' }}>
-            <CardTitle>Quizzes</CardTitle>
-            <Badge variant="sea">Instant Feedback</Badge>
+            <CardTitle className="text-lg sm:text-xl">Quizzes</CardTitle>
+            <Badge variant="sea" className="text-xs sm:text-sm mt-2">Instant Feedback</Badge>
           </CardHeader>
           <CardContent>
-            <p>Test your knowledge with interactive quizzes and mini-games.</p>
-            <p className="text-sm text-ink/60 mt-2">
+            <p className="text-xs sm:text-sm">Test your knowledge with interactive quizzes and mini-games.</p>
+            <p className="text-xs sm:text-sm text-ink/60 mt-2">
               {counts.quizzes} quizzes available for {learningLanguage}.
             </p>
-            {/* Mark Complete button removed */}
           </CardContent>
         </Card>
         {/* Pronunciation */}
         <Card className="hover:shadow-card transition-shadow duration-300 cursor-pointer">
           <CardHeader onClick={() => navigate('/pronunciation')} style={{ cursor: 'pointer' }}>
-            <CardTitle>Pronunciation</CardTitle>
-            <Badge variant="moss">Voice Practice</Badge>
+            <CardTitle className="text-lg sm:text-xl">Pronunciation</CardTitle>
+            <Badge variant="moss" className="text-xs sm:text-sm mt-2">Voice Practice</Badge>
           </CardHeader>
           <CardContent>
-            <p>Practice speaking and get instant feedback on your accent.</p>
-            <p className="text-sm text-ink/60 mt-2">
+            <p className="text-xs sm:text-sm">Practice speaking and get instant feedback on your accent.</p>
+            <p className="text-xs sm:text-sm text-ink/60 mt-2">
               {counts.pronunciation} pronunciation prompts linked to {learningLanguage} lessons.
             </p>
-            {/* Mark Complete button removed */}
           </CardContent>
         </Card>
         {/* Conversation */}
         <Card className="hover:shadow-card transition-shadow duration-300 cursor-pointer">
           <CardHeader onClick={() => navigate('/conversation')} style={{ cursor: 'pointer' }}>
-            <CardTitle>Conversation Scenarios</CardTitle>
-            <Badge variant="clay">Real World</Badge>
+            <CardTitle className="text-lg sm:text-xl">Conversation Scenarios</CardTitle>
+            <Badge variant="clay" className="text-xs sm:text-sm mt-2">Real World</Badge>
           </CardHeader>
           <CardContent>
-            <p>Engage in real-world dialogues and practice your skills.</p>
-            <p className="text-sm text-ink/60 mt-2">
+            <p className="text-xs sm:text-sm">Engage in real-world dialogues and practice your skills.</p>
+            <p className="text-xs sm:text-sm text-ink/60 mt-2">
               {counts.conversation} scenarios available for {learningLanguage}.
             </p>
-            {/* Mark Complete button removed */}
           </CardContent>
         </Card>
       </div>
