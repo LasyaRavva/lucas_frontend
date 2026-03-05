@@ -1,3 +1,9 @@
+Deployment_URL: https://lucasfrontend.netlify.app/
+Frontend_repo: https://github.com/LasyaRavva/lucas_frontend
+Backend_repo: https://github.com/LasyaRavva/lucas_backend
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
